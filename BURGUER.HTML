@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🔥 BurgerBoss | El sabor que gobierna 🇲🇽</title>
+    <!-- Fuentes modernas y atractivas -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800;14..32,900&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 30%, #0a0f1e, #03060c);
+            font-family: 'Inter', sans-serif;
+            color: #f5ede0;
+            scroll-behavior: smooth;
+        }
+
+        /* contenedor principal */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 1.8rem 3rem;
+        }
+
+        /* HEADER con glow y efecto llamativo */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(255, 100, 0, 0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Rubik Glitch', cursive;
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #FFB347, #FF6A00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(255,100,0,0.6);
+            letter-spacing: 2px;
+        }
+
+        .badge {
+            background: #ff7b2c;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: #1f1a12;
+            box-shadow: 0 0 12px #ff7b2c;
+        }
+
+        .hero-tagline {
+            font-weight: 600;
+            font-size: 1.2rem;
+            background: rgba(255, 110, 40, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 8px 20px;
+            border-radius: 60px;
+            border-left: 3px solid #ff7b2c;
+        }
+
+        /* Menú de hamburguesas grid */
+        .menu-section {
+            margin: 3rem 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.8rem;
+            display: inline-block;
+            background: linear-gradient(120deg, #fff0e0, #ffb77c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-left: 5px solid #ff7b2c;
+            padding-left: 20px;
+        }
+
+        .burgers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .burger-card {
+            background: rgba(20, 25, 40, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 123, 44, 0.3);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .burger-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff7b2c;
+            box-shadow: 0 20px 35px -8px #ff7b2c40;
+        }
+
+        .burger-emoji {
+            font-size: 3.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(2px 6px 12px rgba(0,0,0,0.6));
+        }
+
+        .burger-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFD89C, #FF9A4A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .burger-desc {
+            font-size: 0.85rem;
+            color: #cdc6bc;
+            margin: 0.8rem 0;
+            line-height: 1.4;
+        }
+
+        .price {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #ffb347;
+            display: inline-block;
+            margin: 12px 0;
+        }
+
+        .add-btn {
+            background: linear-gradient(95deg, #ff6a2c, #ff3c00);
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 12px rgba(255, 60, 0, 0.4);
+        }
+
+        .add-btn:hover {
+            background: linear-gradient(95deg, #ff8545, #ff5722);
+            transform: scale(0.98);
+            box-shadow: 0 0 18px #ff7b2c;
+        }
+
+        /* carrito flotante + panel */
+        .cart-panel {
+            position: sticky;
+            top: 20px;
+            background: #10131fe6;
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0 2rem;
+            border: 1px solid #ff7b2c80;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: all 0.2s;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #ff9f60;
+            padding-bottom: 0.8rem;
+        }
+
+        .cart-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cart-count {
+            background: #ff5722;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.9rem;
+        }
+
+        .empty-cart-btn {
+            background: rgba(255,255,240,0.1);
+            border: 1px solid #ff7b2c;
+            padding: 6px 14px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 600;
+        }
+
+        .empty-cart-btn:hover {
+            background: #ff5722;
+            color: white;
+        }
+
+        .cart-items {
+            max-height: 280px;
+            overflow-y: auto;
+            margin: 1rem 0;
+            padding-right: 8px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e2335;
+            margin: 8px 0;
+            padding: 10px 12px;
+            border-radius: 60px;
+        }
+
+        .cart-item-info {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+        }
+
+        .cart-item-qty {
+            background: #ff9a4a30;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+
+        .cart-item-price {
+            font-weight: 800;
+            color: #ffb86b;
+        }
+
+        .item-actions button {
+            background: none;
+            border: none;
+            color: #ffaa66;
+            font-size: 1.2rem;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .item-actions button:hover {
+            color: #ff4400;
+            transform: scale(1.1);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            border-top: 2px solid #ffa559;
+            padding-top: 1rem;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(95deg, #ffaa33, #ff771c);
+            width: 100%;
+            padding: 14px;
+            border-radius: 60px;
+            border: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #141414;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(95deg, #ffc34d, #ff9433);
+            box-shadow: 0 0 15px #ffac44;
+            transform: scale(0.99);
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #2a2f3fcc;
+            backdrop-filter: blur(12px);
+            padding: 12px 24px;
+            border-radius: 60px;
+            border-left: 8px solid #ff7b2c;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            color: #ffe4c4;
+        }
+
+        .toast-msg.show {
+            transform: translateX(0);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 750px) {
+            .app-container {
+                padding: 1rem;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+            .hero-tagline {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="hero">
+        <div class="logo-area">
+            <span class="logo">🍔 BURGERBOSS</span>
+            <span class="badge"><i class="fas fa-crown"></i> REY DEL SABOR 🇲🇽</span>
+        </div>
+        <div class="hero-tagline">
+            <i class="fas fa-fire-flame-curved"></i> Parrilla al carbón · Precios en MXN
+        </div>
+    </div>
+
+    <!-- Menú de Hamburguesas -->
+    <div class="menu-section">
+        <div class="section-title">
+            <i class="fas fa-burger"></i> EL PODER DE LAS HAMBURGUESAS
+        </div>
+        <div class="burgers-grid" id="menuGrid"></div>
+    </div>
+
+    <!-- Panel del carrito -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <div class="cart-title">
+                <i class="fas fa-shopping-cart"></i> TU PEDIDO
+                <span class="cart-count" id="cartCountBadge">0</span>
+            </div>
+            <button class="empty-cart-btn" id="emptyCartBtn"><i class="fas fa-trash-alt"></i> Vaciar</button>
+        </div>
+        <div id="cartItemsContainer" class="cart-items">
+            <div style="text-align:center; padding:1rem;">🛒 Aún no has agregado nada... ¡pide la boss!</div>
+        </div>
+        <div class="cart-total">
+            <span>🔥 TOTAL MXN</span>
+            <span id="cartTotalPrice">$0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-credit-card"></i> ORDENAR AHORA</button>
+    </div>
+    <footer>
+        <i class="fas fa-pepper-hot"></i> Sabor intenso · Ingredientes frescos · Envíos en CDMX
+    </footer>
+</div>
+
+<div id="toastMsg" class="toast-msg">✨ Hamburguesa añadida</div>
+
+<script>
+    // ---------- BASE DE DATOS DE HAMBURGUESAS (PESOS MEXICANOS) ----------
+    const menuItems = [
+        {
+            id: 1,
+            name: "🔥 La Infernal",
+            desc: "Doble carne angus, queso pepper jack, jalapeños, salsa diablo, cebolla crispy.",
+            price: 249.00,   // $249 MXN
+            emoji: "🌶️🔥"
+        },
+        {
+            id: 2,
+            name: "👑 El Rey Boss",
+            desc: "Carne premium, tocino ahumado, cheddar, huevo frito, salsa boss y aros de cebolla.",
+            price: 289.00,   // $289 MXN
+            emoji: "👑🍔"
+        },
+        {
+            id: 3,
+            name: "🧀 Cheeseburger Suprema",
+            desc: "Tres quesos (cheddar, mozzarella, azul), carne smash, pepinillos y salsa secreta.",
+            price: 219.00,   // $219 MXN
+            emoji: "🧀🧀"
+        },
+        {
+            id: 4,
+            name: "🍄 Umami Portobello",
+            desc: "Portobello asado, queso brie, rúcula, cebolla caramelizada y mayonesa trufada.",
+            price: 265.00,   // $265 MXN
+            emoji: "🍄✨"
+        },
+        {
+            id: 5,
+            name: "🐔 Crispy Pollo Boss",
+            desc: "Pechuga empanizada crocante, salsa ranch, lechuga, tomate y pepinillos dulces.",
+            price: 229.00,   // $229 MXN
+            emoji: "🐔🍗"
+        },
+        {
+            id: 6,
+            name: "🌱 Vegan Power",
+            desc: "Medallon de lentejas y quinoa, guacamole, cebolla morada, espinacas, pan artesano.",
+            price: 239.00,   // $239 MXN
+            emoji: "🌱💚"
+        }
+    ];
+
+    // Carrito (estructura: { id, name, price, quantity })
+    let cart = [];
+
+    // Elementos DOM
+    const menuGrid = document.getElementById('menuGrid');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotalSpan = document.getElementById('cartTotalPrice');
+    const cartCountBadge = document.getElementById('cartCountBadge');
+    const emptyCartBtn = document.getElementById('emptyCartBtn');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const toastMsgDiv = document.getElementById('toastMsg');
+
+    // Funciones auxiliares
+    function showToast(message, isError = false) {
+        toastMsgDiv.textContent = message;
+        toastMsgDiv.style.borderLeftColor = isError ? '#ff3c3c' : '#ff7b2c';
+        toastMsgDiv.classList.add('show');
+        setTimeout(() => {
+            toastMsgDiv.classList.remove('show');
+        }, 2000);
+    }
+
+    // Guardar carrito en localStorage (persistencia)
+    function saveCart() {
+        localStorage.setItem('burgerBossCart', JSON.stringify(cart));
+    }
+
+    function loadCart() {
+        const stored = localStorage.getItem('burgerBossCart');
+        if (stored) {
+            try {
+                cart = JSON.parse(stored);
+                if (!Array.isArray(cart)) cart = [];
+            } catch(e) { cart = []; }
+        } else {
+            cart = [];
+        }
+        renderCart();
+        renderMenu();
+    }
+
+    // Añadir producto al carrito
+    function addToCart(productId) {
+        const product = menuItems.find(item => item.id === productId);
+        if (!product) return;
+
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+            existing.quantity += 1;
+            showToast(`🍔 +1 ${product.name} · Ahora ${existing.quantity} en carrito`);
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1
+            });
+            showToast(`✨ ${product.name} agregada al pedido`);
+        }
+        saveCart();
+        renderCart();
+        renderMenu();
+    }
+
+    // Modificar cantidad desde carrito
+    function updateItemQuantity(id, delta) {
+        const index = cart.findIndex(item => item.id === id);
+        if (index === -1) return;
+        const newQuantity = cart[index].quantity + delta;
+        if (newQuantity <= 0) {
+            cart.splice(index, 1);
+            showToast(`🗑️ Producto eliminado`, false);
+        } else {
+            cart[index].quantity = newQuantity;
+            showToast(`🔄 Cantidad actualizada: ${cart[index].name} x${newQuantity}`);
+        }
+        saveCart();
+        renderCart();
+        renderMenu();
+    }
+
+    // Vaciar carrito
+    function emptyCart() {
+        if (cart.length === 0) {
+            showToast("El carrito ya está vacío 🍔", false);
+            return;
+        }
+        cart = [];
+        saveCart();
+        renderCart();
+        showToast("🧹 Carrito vaciado. ¡A elegir nuevas burgers!", false);
+    }
+
+    // Calcular total y cantidad de items
+    function getCartTotals() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        return { totalItems, totalPrice };
+    }
+
+    // Formatear precio en pesos mexicanos
+    function formatMXN(price) {
+        return new Intl.NumberFormat('es-MX', {
+            style: 'currency',
+            currency: 'MXN',
+            minimumFractionDigits: 2
+        }).format(price);
+    }
+
+    // Renderizar el carrito en el panel
+    function renderCart() {
+        const { totalItems, totalPrice } = getCartTotals();
+        cartCountBadge.innerText = totalItems;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `<div style="text-align:center; padding:1rem;">🛒 Aún no has agregado nada... ¡pide la boss!</div>`;
+            cartTotalSpan.innerText = formatMXN(totalPrice);
+            return;
+        }
+
+        let html = '';
+        cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            html += `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <span class="cart-item-name">${escapeHtml(item.name)}</span>
+                        <span class="cart-item-qty">x${item.quantity}</span>
+                        <span class="cart-item-price">${formatMXN(subtotal)}</span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="cart-decr" data-id="${item.id}"><i class="fas fa-minus-circle"></i></button>
+                        <button class="cart-incr" data-id="${item.id}"><i class="fas fa-plus-circle"></i></button>
+                        <button class="cart-remove" data-id="${item.id}"><i class="fas fa-trash-can"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        cartItemsContainer.innerHTML = html;
+        cartTotalSpan.innerText = formatMXN(totalPrice);
+
+        // Eventos dinámicos para botones del carrito
+        document.querySelectorAll('.cart-decr').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                updateItemQuantity(id, -1);
+            });
+        });
+        document.querySelectorAll('.cart-incr').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                updateItemQuantity(id, 1);
+            });
+        });
+        document.querySelectorAll('.cart-remove').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                const index = cart.findIndex(i => i.id === id);
+                if (index !== -1) {
+                    cart.splice(index, 1);
+                    saveCart();
+                    renderCart();
+                    renderMenu();
+                    showToast(`❌ Eliminado del pedido`, false);
+                }
+            });
+        });
+    }
+
+    // Renderizar menú de hamburguesas (grid)
+    function renderMenu() {
+        if (!menuGrid) return;
+        menuGrid.innerHTML = '';
+        menuItems.forEach(burger => {
+            const cartItem = cart.find(item => item.id === burger.id);
+            const qtyInCart = cartItem ? cartItem.quantity : 0;
+
+            const card = document.createElement('div');
+            card.className = 'burger-card';
+            card.innerHTML = `
+                <div class="burger-emoji">${burger.emoji}</div>
+                <div class="burger-name">${escapeHtml(burger.name)}</div>
+                <div class="burger-desc">${escapeHtml(burger.desc)}</div>
+                <div class="price">${formatMXN(burger.price)}</div>
+                ${qtyInCart > 0 ? `<div style="font-size:0.75rem; margin-bottom:8px;"><i class="fas fa-check-circle"></i> En carrito: ${qtyInCart}</div>` : ''}
+                <button class="add-btn" data-id="${burger.id}"><i class="fas fa-cart-plus"></i> AGREGAR</button>
+            `;
+            menuGrid.appendChild(card);
+        });
+
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                addToCart(id);
+            });
+        });
+    }
+
+    // Checkout (simular orden)
+    function processCheckout() {
+        const { totalItems, totalPrice } = getCartTotals();
+        if (cart.length === 0) {
+            showToast("⚠️ No hay productos en el carrito. ¡Agrega una hamburguesa!", true);
+            return;
+        }
+        
+        let orderSummary = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
+        const totalFormatted = formatMXN(totalPrice);
+        
+        showToast(`🎉 ¡PEDIDO REALIZADO! Total ${totalFormatted}. Gracias por elegir BurgerBoss.`, false);
+        
+        setTimeout(() => {
+            alert(`🍔✨ PEDIDO CONFIRMADO ✨🍔\n\nDetalle: ${orderSummary}\nTotal: ${totalFormatted}\n\n🇲🇽 Preparando al carbón 🔥 ¡Llegará en 30 min!`);
+        }, 100);
+        
+        // Vaciar carrito después de ordenar
+        cart = [];
+        saveCart();
+        renderCart();
+        renderMenu();
+    }
+
+    // escape para XSS
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    // Event listeners globales
+    emptyCartBtn.addEventListener('click', emptyCart);
+    checkoutBtn.addEventListener('click', processCheckout);
+
+    // Inicializar
+    loadCart();
+    renderMenu();
+
+    // Efecto sutil adicional
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = `
+        .burger-card {
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .cart-panel {
+            transition: all 0.2s;
+        }
+        button {
+            cursor: pointer;
+        }
+    `;
+    document.head.appendChild(styleAnim);
+</script>
+</body>
+</html>
